@@ -3,12 +3,27 @@
 #include <cstring>
 #include "MovieTree.h"
 using namespace std;
+
+/*Precondition: None
+ * Postcondition: Root of the binary search tree set to null.
+ * This method initializes the binary serach tree.
+ */ 
 MovieTree::MovieTree(){
 	root = NULL;
 }
+
+/*Precondition: None
+ * Postcondition: Calls method to delete tree.
+ * This method deletes the binary search tree.
+ */ 
 MovieTree::~MovieTree(){
 	DeleteAll(root);
 }
+
+/*Precondition: MovieNode *node
+ * Postcondition: Recursively goes through each element of the binary search tree and deletes it.
+ * This method deletes each element inside the binary search tree and prints the movies as it deletes them.
+ */ 
 void MovieTree::DeleteAll(MovieNode *node){
 	if (node->left!=NULL){
 		DeleteAll(node->left);
@@ -19,9 +34,19 @@ void MovieTree::DeleteAll(MovieNode *node){
 	cout<<"Deleting: "<<node->title<<endl; 
 	delete node;
 }
+
+/*Precondition: None
+ * Postcondition: Entire movie inventory is printed.
+ * This method calls the method that prints the movie inventory.
+ */ 
 void MovieTree::printMovieInventory(){
 	printMovieInventory(root);
 }
+
+/*Precondition: MovieNode *node, intially the root.
+ * Postcondition: Prints all of the movies and their quantity.
+ * This method recursively prints each nodes title and quantity.
+ */ 
 void MovieTree::printMovieInventory(MovieNode * node){
 	if (node->left!=NULL){
 		printMovieInventory(node->left);
@@ -31,6 +56,11 @@ void MovieTree::printMovieInventory(MovieNode * node){
 		printMovieInventory(node->right);
 	}
 }
+
+/*Precondition: None
+ * Postcondition: returns the number of movie nodes in the binary search tree.
+ * This method calls a recursive function and returns the number of nodes in the tree.
+ */ 
 int MovieTree::countMovieNodes(){
 	int *c;
 	int c2=0;
@@ -38,6 +68,11 @@ int MovieTree::countMovieNodes(){
 	countMovieNodes(root, c);
 	return *c;
 } 
+
+/*Precondition: MovieNode and int pointer
+ * Postcondition: Returns nothing but changes the int pointer to the number of movie nodes in the tree.
+ * This method recursively counts the number of nodes in the tree.
+ */ 
 void MovieTree::countMovieNodes(MovieNode *node, int *c){
 	if (node->left!=NULL){
 		countMovieNodes(node->left, c);
@@ -47,6 +82,11 @@ void MovieTree::countMovieNodes(MovieNode *node, int *c){
 		countMovieNodes(node->right,c);
 	}
 }
+
+/*Precondition: int ranking, string title, int releaseYear, int quantity
+ * Postcondition: A new movie node is added to the binary search tree.
+ * This method adds a new node to the tree.
+ */ 
 void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int quantity){
 	MovieNode *node=new MovieNode;
 	MovieNode *temp=root;
@@ -82,6 +122,11 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
 			node->parent=parent;
 		}
 }
+
+/*Precondition: string title
+ * Postcondition: Movie information including rank, title, year and quantity are printed.
+ * This method finds a movie node and prints its information.
+ */ 
 string MovieTree::findMovie(std::string title){
 	MovieNode *node=root;
 	while (node!=NULL){			//root is NULL in an empty tree, left and right child NULL at bottom of tree
@@ -104,6 +149,11 @@ string MovieTree::findMovie(std::string title){
 	cout<<"Movie not found."<<endl;
 	return title;
 }
+
+/*Precondition: string title
+ * Postcondition: Deletes a movie node and reorders binary search tree to accomodate the missing node.
+ * This method deletes a movie node from the binary search tree.
+ */ 
 void MovieTree::deleteMovieNode(string title){
 	MovieNode *node = root;
 	bool found=false;
@@ -179,12 +229,22 @@ void MovieTree::deleteMovieNode(string title){
 		cout<<"Movie not found"<<endl;
 	}
 }
+
+/*Precondition: movie node
+ * Postcondition: Returns the smallest and leftmost node below the node that is given.
+ * This method searches through a part of the tree and returns the lowest value.
+ */ 
 MovieNode* MovieTree::treeMinimum(MovieNode *node){
 	while (node->left!=NULL){
 		node=node->left;
 	}
 	return node;
 }
+
+/*Precondition: string title
+ * Postcondition: Returns -1 if the movie is not found and the quantity of the movie that is rented otherwise.
+ * This method searches for the title and then decreases the quantity by one, prints the movie information, and rents the movie out.
+ */ 
 int MovieTree::rentMovie(string title){
 	MovieNode *node=root;
 	int a=0;
@@ -216,6 +276,11 @@ int MovieTree::rentMovie(string title){
 	}
 	return node->quantity;
 }
+
+/*Precondition: None
+ * Postcondition: Each movie now has a quantity of at least ten. The total cost of buying the new movies is returned.
+ * This method stocks movies with less than ten in stock. 
+ */ 
 int MovieTree::stockMovies(){
 	int *cost;
 	int cost2=0;
@@ -226,6 +291,11 @@ int MovieTree::stockMovies(){
 	cost=0;
 	return cost2;
 }
+
+/*Precondition: string name
+ * Postcondition: The renter by the given name is removed from the hash table.
+ * This method removes the renter from the hash table when they return the movie that they have rented.
+ */ 
 void MovieTree::removeRenter(string name){
 	int index=hashSum(name, tableSize);
 	bool done =false;
@@ -260,6 +330,11 @@ void MovieTree::removeRenter(string name){
 		}
 	}
 }
+
+/*Precondition: string title
+ * Postcondition: Prints the movies information and adds one to its quantity.
+ * This method returns the rented movie.
+ */ 
 void MovieTree::addReturnedMovie(string title){
 	MovieNode *node=root;
 	while (node!=NULL){		
@@ -283,11 +358,21 @@ void MovieTree::addReturnedMovie(string title){
 	}
 
 }
+
+/*Precondition: None
+ * Postcondition: All hash table values set to NULL.
+ * This method initializes the hash table.
+ */ 
 void MovieTree::initial(){
 	for (int x=0; x<tableSize; x++){
 		hashTable[x]=NULL;
 	}
 }
+
+/*Precondition: string name, string movie
+ * Postcondition: Adds the name of the renter to the hash table.
+ * This method adds a renter to the hash table of renters.
+ */ 
 void MovieTree::addRenter(string name, string movie){
 	HashElem* node = new HashElem;
 	node->name = name;
@@ -307,6 +392,11 @@ void MovieTree::addRenter(string name, string movie){
 		node->previous = temp;
 	}
 }
+
+/*Precondition: string x, int s
+ * Postcondition: returns a sum based on the integer value of the characters in the string.
+ * This method returns a number given the string to be used by the hash table.
+ */ 
 int MovieTree::hashSum(string x, int s){
 	int sum = 0;
 	for (unsigned int z=0; z<x.length(); z++){
@@ -315,6 +405,11 @@ int MovieTree::hashSum(string x, int s){
 	sum = sum % s;
 	return sum;
 }
+
+/*Precondition: MovieNode node, int *cost
+ * Postcondition: All movies now have at least 10 copies in stock, prints the amount of each movie that was added.
+ * This method restocks movies with less than ten in stock.
+ */ 
 void MovieTree::stockMovies(MovieNode *node, int *cost){
 	if (node->left!=NULL){
 		stockMovies(node->left, cost);
@@ -328,6 +423,11 @@ void MovieTree::stockMovies(MovieNode *node, int *cost){
 		node->quantity=10;
 	}
 }
+
+/*Precondition: None
+ * Postcondition: Prints the names of each renter in the hash table.
+ * This method prints the renters names.
+ */ 
 void MovieTree::printRenters(){
 	HashElem *temp;
 	bool done = false;

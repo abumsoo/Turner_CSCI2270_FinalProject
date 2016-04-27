@@ -8,6 +8,7 @@
 #include <cstring>
 using namespace std;
 int main(int argc, char* argv[]){
+	// Initializes variables and reads in the information from the file.
 	ifstream inFile;
 	inFile.open(argv[1]);	
 	string data;
@@ -57,6 +58,7 @@ int main(int argc, char* argv[]){
 	int input;
 	bool done=false;
 	mt.initial();
+	//loops through the main menu until the user is finished.
 	while (done==false){
 		cout << "======Main Menu======" << endl;     
 		cout << "1. Find a movie" << endl;     
@@ -69,6 +71,7 @@ int main(int argc, char* argv[]){
 		cout << "8. Print renter list" << endl;
 		cout << "9. Quit" << endl;
 		cin>>input;
+		//Finds movie
 		if (input==1){
 			cout<<"Enter title:"<<endl;
 			string title;
@@ -77,6 +80,7 @@ int main(int argc, char* argv[]){
 			getline(cin, title);
 			mt.findMovie(title);
 		}
+		//rent movie
 		else if (input==2){
 			string title;
 			string name;
@@ -88,14 +92,18 @@ int main(int argc, char* argv[]){
 			getline(cin, title);
 			int k=mt.rentMovie(title);
 			mt.addRenter(name, title);
+			storeFunds= storeFunds +5;
+			cout<<"Current Store Funds: "<<storeFunds<<endl;
 			if (k==0){
 				mt.deleteMovieNode(title);
 			}
 		}
+		//prints inventory
 		else if (input==3){
 			int j;
 			mt.printMovieInventory();
 		}
+		//deletes a movie
 		else if (input==4){
 			cout<<"Enter title:"<<endl;
 			string title;
@@ -104,13 +112,16 @@ int main(int argc, char* argv[]){
 			getline(cin, title);
 			mt.deleteMovieNode(title);
 		}
+		// counts the number of unique movies
 		else if (input==5){
 			cout<<"Tree contains: "<<mt.countMovieNodes()<<" movies." << endl; 
 		}
+		//restocks the movies
 		else if (input==6){
 			storeFunds = storeFunds - mt.stockMovies();
 			cout<< "$"<<storeFunds<< " in store funds remaining."<<endl;
 		}
+		//returns a movie
 		else if (input==7){
 			string title;
 			string name;
@@ -123,9 +134,11 @@ int main(int argc, char* argv[]){
 			mt.addReturnedMovie(title);
 			mt.removeRenter(name);
 		}
+		//prints the list of current renters
 		else if (input == 8){
 			mt.printRenters();
 		}
+		//exits the program
 		else if (input==9){
 			cout<<"Goodbye!"<<endl;
 			done=true;

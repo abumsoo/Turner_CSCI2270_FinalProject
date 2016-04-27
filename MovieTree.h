@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// creates the MovieNode element which stores each individual movie and its corresponding information.
 struct MovieNode{
     int ranking;
     std::string title;
@@ -23,6 +24,7 @@ struct MovieNode{
     }
 
 };
+//creates the hash table
 struct HashElem{
 	std::string name;
 	HashElem *next;
@@ -61,7 +63,7 @@ class MovieTree
         void printMovieInventory(MovieNode * node);
         MovieNode* search(std::string title);
         MovieNode *root;
-        void DeleteAll(MovieNode * node); //use this for the post-order traversal deletion of the tree
+        void DeleteAll(MovieNode * node);
         MovieNode* treeMinimum(MovieNode *node);
         void countMovieNodes(MovieNode *node, int *c);
         void stockMovies(MovieNode * node, int *cost);
