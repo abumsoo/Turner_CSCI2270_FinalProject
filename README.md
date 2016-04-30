@@ -7,8 +7,8 @@ The program works by reading in a list of movies and information about them and 
 things can be done in terms of altering and changing the stored data.
 
 ## How to Run
-To run the program you must first download the FinalProject.cpp, MovieTree.cpp, MovieTree.h, and Movie.txt files. Open the files with code
-in geany and compile the MovieTree.cpp file
+To run the program you must first download the FinalProject.cpp, MovieTree.cpp, MovieTree.h, and Movie.txt files.
+Open the files with code in geany and compile the MovieTree.cpp file
 ```
 g++ -std=c++11 MovieTree.cpp
 ```
