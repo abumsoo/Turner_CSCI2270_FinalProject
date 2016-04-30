@@ -126,7 +126,7 @@ void MovieTree::addMovieNode(int ranking, string title, int releaseYear, int qua
 /*Precondition: string title
  * Postcondition: Movie information including rank, title, year and quantity are printed.
  * This method finds a movie node and prints its information.
- */ 
+ */
 string MovieTree::findMovie(std::string title){
 	MovieNode *node=root;
 	while (node!=NULL){			//root is NULL in an empty tree, left and right child NULL at bottom of tree
@@ -137,12 +137,12 @@ string MovieTree::findMovie(std::string title){
 			node=node->right;
 		}
 		else {
-			cout << "Movie Info:" << endl;         
-			cout << "===========" << endl;         
-			cout << "Ranking:" << node->ranking << endl;       
-			cout << "Title:" << node->title << endl;         
-			cout << "Year:" << node->year << endl;         
-			cout << "Quantity:" << node->quantity << endl; 
+			cout << "Movie Info:" << endl;
+			cout << "===========" << endl;
+			cout << "Ranking:" << node->ranking << endl;
+			cout << "Title:" << node->title << endl;
+			cout << "Year:" << node->year << endl;
+			cout << "Quantity:" << node->quantity << endl;
 			return title;
 		}
 	}
@@ -153,7 +153,7 @@ string MovieTree::findMovie(std::string title){
 /*Precondition: string title
  * Postcondition: Deletes a movie node and reorders binary search tree to accomodate the missing node.
  * This method deletes a movie node from the binary search tree.
- */ 
+ */
 void MovieTree::deleteMovieNode(string title){
 	MovieNode *node = root;
 	bool found=false;

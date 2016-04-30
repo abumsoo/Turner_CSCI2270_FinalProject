@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include <cstring>
+#include <limits>
 using namespace std;
 int main(int argc, char* argv[]){
 	// Initializes variables and reads in the information from the file.
@@ -56,22 +57,39 @@ int main(int argc, char* argv[]){
 		count=0;
 	}
 	int input;
+  string line;
 	bool done=false;
 	mt.initial();
 	//loops through the main menu until the user is finished.
 	while (done==false){
-		cout << "======Main Menu======" << endl;     
-		cout << "1. Find a movie" << endl;     
-		cout << "2. Rent a movie" << endl;     
-		cout << "3. Print the inventory" <<endl;   
+		cout << "======Main Menu======" << endl;
+		cout << "1. Find a movie" << endl;
+		cout << "2. Rent a movie" << endl;
+		cout << "3. Print the inventory" <<endl;
 		cout << "4. Delete a movie" << endl;
-		cout << "5. Count the movies" << endl; 
+		cout << "5. Count the movies" << endl;
 		cout << "6. Restock movies" <<endl;
 		cout << "7. Return a movie" <<endl;
 		cout << "8. Print renter list" << endl;
 		cout << "9. Quit" << endl;
-		cin>>input;
-		//Finds movie
+
+    // Method of getting the user's choice, so that it doesn't
+    // break when they input a non-numeric value
+    if (cin >> input){
+      // It worked (input is now in a good state)
+    }
+    else {
+      // input is in a bad state.
+      // So first clear the state.
+      cin.clear();
+
+      // Now you must get rid of the bad input.
+      // Personally I would just ignore the rest of the line
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+      // now that you have reset the stream you can go back and try and read again.
+    }
+
 		if (input==1){
 			cout<<"Enter title:"<<endl;
 			string title;

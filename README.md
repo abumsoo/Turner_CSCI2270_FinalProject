@@ -1,7 +1,7 @@
 # Turner_CSCI2270_FinalProject
 ## Project Summary
 The purpose of this project is to expand upon assignments 6 and 7 by introducing new features and utilizing different data structures.
-The increased funcionality includes a new money systeme that is used for movie rentals, the ablility to restock the available movies, the ability to
+The increased funcionality includes a new money system that is used for movie rentals, the ablility to restock the available movies, the ability to
 return movies, and a hash function was included in the program that allows the renters information to be stored.
 The program works by reading in a list of movies and information about them and storing them in a binary search tree. From, there a number of different
 things can be done in terms of altering and changing the stored data.
